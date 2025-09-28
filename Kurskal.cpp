@@ -6,7 +6,7 @@ struct Edge {
     int u, v, w;
 };
 
-// ¹öºí Á¤·Ä·Î °£¼± Á¤·Ä (°¡ÁßÄ¡ ±âÁØ)
+// ë²„ë¸” ì •ë ¬ë¡œ ê°„ì„  ì •ë ¬ (ê°€ì¤‘ì¹˜ ê¸°ì¤€)
 void bubbleSort(vector<Edge>& edges) {
     int n = edges.size();
     for (int i = 0; i < n - 1; i++) {
@@ -30,14 +30,14 @@ struct DSU {
 
     int find(int x) {
         if (parent[x] != x)
-            parent[x] = find(parent[x]); // °æ·Î ¾ĞÃà
+            parent[x] = find(parent[x]); // ê²½ë¡œ ì••ì¶•
         return parent[x];
     }
 
     bool unite(int a, int b) {
         a = find(a);
         b = find(b);
-        if (a == b) return false; // »çÀÌÅ¬ ¹ß»ı
+        if (a == b) return false; // ì‚¬ì´í´ ë°œìƒ
         if (rank[a] < rank[b]) {
             parent[a] = b;
         }
@@ -53,34 +53,35 @@ struct DSU {
 };
 
 int main() {
-    int V = 5; // Á¤Á¡ °³¼ö
+    int V = 5; // ì •ì  ê°œìˆ˜
     vector<Edge> edges;
 
-    // °£¼± Ãß°¡ (u, v, w)
+    // ê°„ì„  ì¶”ê°€ (u, v, w)
     edges.push_back({ 0, 1, 10 });
     edges.push_back({ 0, 2, 5 });
     edges.push_back({ 1, 3, 2 });
     edges.push_back({ 2, 3, 7 });
     edges.push_back({ 3, 4, 1 });
 
-    // 1. °£¼±µéÀ» °¡ÁßÄ¡ ±âÁØ Á¤·Ä (Á÷Á¢ ±¸Çö)
+    // ê°„ì„ ë“¤ì„ ê°€ì¤‘ì¹˜ ê¸°ì¤€ ì •ë ¬
     bubbleSort(edges);
 
     DSU dsu(V);
     vector<Edge> mst;
 
-    // 2. ÀÛÀº °¡ÁßÄ¡ °£¼±ºÎÅÍ ¼±ÅÃ
+    // ì‘ì€ ê°€ì¤‘ì¹˜ ê°„ì„ ë¶€í„° ì„ íƒ
     for (auto& e : edges) {
         if (dsu.unite(e.u, e.v)) {
             mst.push_back(e);
         }
     }
 
-    // 3. °á°ú Ãâ·Â
-    cout << "MST °£¼±µé:\n";
+    // ê²°ê³¼ ì¶œë ¥
+    cout << "MST ê°„ì„ ë“¤:\n";
     for (auto& e : mst) {
-        cout << e.u << " - " << e.v << " (°¡ÁßÄ¡ " << e.w << ")\n";
+        cout << e.u << " - " << e.v << " (ê°€ì¤‘ì¹˜ " << e.w << ")\n";
     }
 
     return 0;
+
 }

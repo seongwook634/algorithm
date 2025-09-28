@@ -18,9 +18,10 @@ long long fib(int n) {
 
 int main() {
     int n;
-    cout << "n ÀÔ·Â: ";
+    cout << "n ìž…ë ¥: ";
     cin >> n;
 
-    cout << n << "¹øÂ° ÇÇº¸³ªÄ¡ ¼ö: " << fib(n) << endl;
+    cout << n << "ë²ˆì§¸ í”¼ë³´ë‚˜ì¹˜ ìˆ˜: " << fib(n) << endl;
     return 0;
+
 }
